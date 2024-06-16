@@ -97,11 +97,11 @@ export const CommentSection = ({ postId }) => {
     setShowModal(false);
     try {
       if (!currentUser) {
-        navigate('/sign-in');
+        navigate("/sign-in");
         return;
       }
       const res = await fetch(`/api/comment/deleteComment/${commentId}`, {
-        method: 'DELETE',
+        method: "DELETE",
       });
       const data = await res.json();
       console.log(data);

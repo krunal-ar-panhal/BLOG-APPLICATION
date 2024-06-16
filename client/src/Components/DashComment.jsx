@@ -1,13 +1,13 @@
-import { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
-import { HiOutlineExclamationCircle } from 'react-icons/hi';
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { HiOutlineExclamationCircle } from "react-icons/hi";
 
 export const DashComment = () => {
   const { currentUser } = useSelector((state) => state.user);
   const [comments, setComments] = useState([]);
   const [showMore, setShowMore] = useState(true);
   const [showModal, setShowModal] = useState(false);
-  const [commentIdToDelete, setCommentIdToDelete] = useState('');
+  const [commentIdToDelete, setCommentIdToDelete] = useState("");
 
   useEffect(() => {
     const fetchComments = async () => {
@@ -53,7 +53,7 @@ export const DashComment = () => {
       const res = await fetch(
         `/api/comment/deleteComment/${commentIdToDelete}`,
         {
-          method: 'DELETE',
+          method: "DELETE",
         }
       );
       const data = await res.json();
@@ -77,18 +77,35 @@ export const DashComment = () => {
           <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
             <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
               <tr>
-                <th scope="col" className="px-6 py-3">Date updated</th>
-                <th scope="col" className="px-6 py-3">Comment content</th>
-                <th scope="col" className="px-6 py-3">Number of likes</th>
-                <th scope="col" className="px-6 py-3">PostId</th>
-                <th scope="col" className="px-6 py-3">UserId</th>
-                <th scope="col" className="px-6 py-3">Delete</th>
+                <th scope="col" className="px-6 py-3">
+                  Date updated
+                </th>
+                <th scope="col" className="px-6 py-3">
+                  Comment content
+                </th>
+                <th scope="col" className="px-6 py-3">
+                  Number of likes
+                </th>
+                <th scope="col" className="px-6 py-3">
+                  PostId
+                </th>
+                <th scope="col" className="px-6 py-3">
+                  UserId
+                </th>
+                <th scope="col" className="px-6 py-3">
+                  Delete
+                </th>
               </tr>
             </thead>
             <tbody>
               {comments.map((comment) => (
-                <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700" key={comment._id}>
-                  <td className="px-6 py-4">{new Date(comment.updatedAt).toLocaleDateString()}</td>
+                <tr
+                  className="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
+                  key={comment._id}
+                >
+                  <td className="px-6 py-4">
+                    {new Date(comment.updatedAt).toLocaleDateString()}
+                  </td>
                   <td className="px-6 py-4">{comment.content}</td>
                   <td className="px-6 py-4">{comment.numberOfLikes}</td>
                   <td className="px-6 py-4">{comment.postId}</td>
@@ -148,4 +165,4 @@ export const DashComment = () => {
       )}
     </div>
   );
-}
+};

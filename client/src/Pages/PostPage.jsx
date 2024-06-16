@@ -1,8 +1,8 @@
-import { useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
-import { CallToAction } from '../Components/CallToAction';
-import { CommentSection } from '../Components/CommetSection';
-import { PostCard } from '../Components/PostCard';
+import { useEffect, useState } from "react";
+import { Link, useParams } from "react-router-dom";
+import { CallToAction } from "../Components/CallToAction";
+import { CommentSection } from "../Components/CommetSection";
+import { PostCard } from "../Components/PostCard";
 
 export const PostPage = () => {
   const { postSlug } = useParams();
@@ -35,7 +35,7 @@ export const PostPage = () => {
   useEffect(() => {
     const fetchRecentPosts = async () => {
       try {
-        const res = await fetch('/api/post/getposts?limit=3');
+        const res = await fetch("/api/post/getposts?limit=3");
         const data = await res.json();
         if (res.ok) {
           setRecentPosts(data.posts);
@@ -58,7 +58,9 @@ export const PostPage = () => {
   if (error) {
     return (
       <div className="flex justify-center items-center min-h-screen">
-        <p className="text-red-500">Error loading post. Please try again later.</p>
+        <p className="text-red-500">
+          Error loading post. Please try again later.
+        </p>
       </div>
     );
   }
@@ -68,7 +70,10 @@ export const PostPage = () => {
       <h1 className="text-3xl mt-10 p-3 text-center font-serif max-w-2xl mx-auto lg:text-4xl">
         {post && post.title}
       </h1>
-      <Link to={`/search?category=${post && post.category}`} className="self-center mt-5">
+      <Link
+        to={`/search?category=${post && post.category}`}
+        className="self-center mt-5"
+      >
         <button className="bg-gray-300 text-gray-700 text-xs py-1 px-3 rounded-full">
           {post && post.category}
         </button>
@@ -96,7 +101,9 @@ export const PostPage = () => {
         <h1 className="text-xl mt-5">Recent articles</h1>
         <div className="flex flex-wrap gap-5 mt-5 justify-center">
           {recentPosts &&
-            recentPosts.map((recentPost) => <PostCard key={recentPost._id} post={recentPost} />)}
+            recentPosts.map((recentPost) => (
+              <PostCard key={recentPost._id} post={recentPost} />
+            ))}
         </div>
       </div>
     </main>

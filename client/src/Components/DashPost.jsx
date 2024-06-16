@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Link, Navigate } from "react-router-dom";
-import { HiOutlineExclamationCircle } from 'react-icons/hi';
+import { HiOutlineExclamationCircle } from "react-icons/hi";
 
 export const DashPost = () => {
   const { currentUser } = useSelector((state) => state.user);
   const [userPosts, setUserPosts] = useState([]);
   const [showMore, setShowMore] = useState(true);
   const [showModal, setShowModal] = useState(false);
-  const [postIdToDelete, setPostIdToDelete] = useState('');
+  const [postIdToDelete, setPostIdToDelete] = useState("");
 
   if (!currentUser.isAdmin) {
     return <Navigate to="/" />;
@@ -59,7 +59,7 @@ export const DashPost = () => {
       const res = await fetch(
         `/api/post/deletepost/${postIdToDelete}/${currentUser._id}`,
         {
-          method: 'DELETE',
+          method: "DELETE",
         }
       );
       const data = await res.json();
@@ -78,72 +78,72 @@ export const DashPost = () => {
   };
 
   return (
-    <div className='overflow-x-auto p-3 scrollbar scrollbar-track-gray-800 scrollbar-thumb-slate-300 mt-2'>
+    <div className="overflow-x-auto p-3 scrollbar scrollbar-track-gray-800 scrollbar-thumb-slate-300 mt-2">
       {currentUser.isAdmin && userPosts.length > 0 ? (
-        <div className='shadow-md'>
-          <table className='min-w-full divide-y divide-gray-200'>
-            <thead className='bg-gray-800'>
+        <div className="shadow-md">
+          <table className="min-w-full divide-y divide-gray-200">
+            <thead className="bg-gray-800">
               <tr>
-                <th className='px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider'>
+                <th className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
                   Date updated
                 </th>
-                <th className='px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider'>
+                <th className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
                   Post image
                 </th>
-                <th className='px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider'>
+                <th className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
                   Post title
                 </th>
-                <th className='px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider'>
+                <th className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
                   Category
                 </th>
-                <th className='px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider'>
+                <th className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
                   Delete
                 </th>
-                <th className='px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider'>
+                <th className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
                   Edit
                 </th>
               </tr>
             </thead>
-            <tbody className='bg-white divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700'>
+            <tbody className="bg-white divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700">
               {userPosts.map((post) => (
-                <tr key={post._id} className='bg-white dark:bg-gray-800'>
-                  <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-gray-200'>
+                <tr key={post._id} className="bg-white dark:bg-gray-800">
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-gray-200">
                     {new Date(post.updatedAt).toLocaleDateString()}
                   </td>
-                  <td className='px-6 py-4 whitespace-nowrap'>
+                  <td className="px-6 py-4 whitespace-nowrap">
                     <Link to={`/post/${post.slug}`}>
                       <img
                         src={post.image}
                         alt={post.title}
-                        className='w-20 h-10 object-cover bg-gray-500'
+                        className="w-20 h-10 object-cover bg-gray-500"
                       />
                     </Link>
                   </td>
-                  <td className='px-6 py-4 whitespace-nowrap'>
+                  <td className="px-6 py-4 whitespace-nowrap">
                     <Link
-                      className='font-medium text-gray-900 dark:text-white hover:bg-gray-200 p-1 rounded'
+                      className="font-medium text-gray-900 dark:text-white hover:bg-gray-200 p-1 rounded"
                       to={`/post/${post.slug}`}
                     >
                       {post.title}
                     </Link>
                   </td>
-                  <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-200'>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-200">
                     {post.category}
                   </td>
-                  <td className='px-6 py-4 whitespace-nowrap text-sm'>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm">
                     <span
                       onClick={() => {
                         setShowModal(true);
                         setPostIdToDelete(post._id);
                       }}
-                      className='font-medium text-red-500 hover:underline cursor-pointer'
+                      className="font-medium text-red-500 hover:underline cursor-pointer"
                     >
                       Delete
                     </span>
                   </td>
-                  <td className='px-6 py-4 whitespace-nowrap text-sm'>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm">
                     <Link
-                      className='text-teal-500 hover:underline'
+                      className="text-teal-500 hover:underline"
                       to={`/update-post/${post._id}`}
                     >
                       <span>Edit</span>
@@ -156,7 +156,7 @@ export const DashPost = () => {
           {showMore && (
             <button
               onClick={handleShowMore}
-              className='w-full text-teal-500 self-center text-sm py-7'
+              className="w-full text-teal-500 self-center text-sm py-7"
             >
               Show more
             </button>

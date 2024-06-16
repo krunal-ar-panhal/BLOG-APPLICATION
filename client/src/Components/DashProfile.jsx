@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState } from "react";
 import {
   deleteUserFailure,
   deleteUserStart,
@@ -12,8 +12,8 @@ import {
 } from "../Redux/user/userSlice";
 import { useSelector, useDispatch } from "react-redux";
 import { NavLink, useNavigate } from "react-router-dom";
-import toast from 'react-hot-toast';
-import { HiOutlineExclamationCircle } from 'react-icons/hi';
+import toast from "react-hot-toast";
+import { HiOutlineExclamationCircle } from "react-icons/hi";
 
 export const DashProfile = () => {
   const { currentUser, loading, error } = useSelector((state) => state.user);
@@ -46,8 +46,8 @@ export const DashProfile = () => {
       console.log(data);
       if (data.success) {
         dispatch(updateUserSuccess(data));
-        navigate('/');
-        toast.success('User updated');
+        navigate("/");
+        toast.success("User updated");
         setUpdateUser(true);
         return;
       }
@@ -148,7 +148,10 @@ export const DashProfile = () => {
             )}
           </form>
           <div className="flex justify-between">
-            <button onClick={() => setShowModal(true)} className="text-red-700 hover:bg-gray-200 rounded-lg p-1">
+            <button
+              onClick={() => setShowModal(true)}
+              className="text-red-700 hover:bg-gray-200 rounded-lg p-1"
+            >
               Delete account
             </button>
             <button

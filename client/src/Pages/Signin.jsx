@@ -1,7 +1,11 @@
 import React, { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
-import { useSelector, useDispatch } from 'react-redux';
-import { signinFailure, signinStart, signinSuccess } from "../Redux/user/userSlice";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  signinFailure,
+  signinStart,
+  signinSuccess,
+} from "../Redux/user/userSlice";
 import { Google } from "../Components/Google";
 import toast from "react-hot-toast";
 
@@ -35,14 +39,14 @@ export const Signin = () => {
       if (!data.success === false) {
         dispatch(signinSuccess(data));
         navigate("/");
-        toast.success('user logged')
+        toast.success("user logged");
         return;
       }
       dispatch(signinFailure(data.message));
-      toast.error(data.message)
+      toast.error(data.message);
     } catch (error) {
       dispatch(signinFailure(error.message));
-      toast.error(error.message)
+      toast.error(error.message);
     }
   };
 
@@ -72,7 +76,7 @@ export const Signin = () => {
             <button className="p-3 rounded-lg border bg-blue-500 text-white hover:bg-blue-700 active:bg-blue-900 shadow-xl">
               SIGN-IN
             </button>
-            <Google/>
+            <Google />
           </form>
           <div>
             <p>

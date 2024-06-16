@@ -60,7 +60,10 @@ export const Signin = async (req, res) => {
       });
     }
 
-    const token = jwt.sign({ _id: user._id , isAdmin: user.isAdmin }, process.env.JWTS);
+    const token = jwt.sign(
+      { _id: user._id, isAdmin: user.isAdmin },
+      process.env.JWTS
+    );
     const { password: pass, ...rest } = user._doc;
     return res
       .cookie("accessToken", token, { httpOnly: true })
@@ -100,7 +103,10 @@ export const google = async (req, res, next) => {
   try {
     const user = await User.findOne({ email });
     if (user) {
-      const token = jwt.sign({ _id: user._id , isAdmin : user.isAdmin}, process.env.JWTS);
+      const token = jwt.sign(
+        { _id: user._id, isAdmin: user.isAdmin },
+        process.env.JWTS
+      );
       const { password: pass, ...rest } = user._doc;
       res
         .cookie("accessToken", token, { httpOnly: true })
@@ -120,7 +126,10 @@ export const google = async (req, res, next) => {
         profilePicture: googlePhotoUrl,
       });
       await newUser.save();
-      const token = jwt.sign({ _id: newUser._id, isAdmin: newUser.isAdmin }, process.env.JWTS);
+      const token = jwt.sign(
+        { _id: newUser._id, isAdmin: newUser.isAdmin },
+        process.env.JWTS
+      );
       const { password: pass, ...rest } = newUser._doc;
       res
         .cookie("accessToken", token, { httpOnly: true })
@@ -132,24 +141,23 @@ export const google = async (req, res, next) => {
   }
 };
 
-
-export const userDelete = async (req,res) => {
+export const userDelete = async (req, res) => {
   try {
     const user = await User.findByIdAndDelete(req.user._id);
-    if(!user){
-      return res.status(400).json('delete your account');
+    if (!user) {
+      return res.status(400).json("delete your account");
     }
-    res.clearCookie('accessToken');
+    res.clearCookie("accessToken");
     res.status(200).json({
-      success : true,
-      message : 'user deleted',
-    })
+      success: true,
+      message: "user deleted",
+    });
   } catch (error) {
     res.status(200).json({
-      success : false,
-      message : 'something went wrong',
-      error
-    })
+      success: false,
+      message: "something went wrong",
+      error,
+    });
   }
 };
 
@@ -157,11 +165,11 @@ export const getUser = async (req, res) => {
   try {
     const user = await User.findById(req.params.userId);
     if (!user) {
-      return res.status(404).json('usr not found')
+      return res.status(404).json("usr not found");
     }
     const { password, ...rest } = user._doc;
     res.status(200).json(rest);
   } catch (error) {
-    res.status(403).json(error)
+    res.status(403).json(error);
   }
 };

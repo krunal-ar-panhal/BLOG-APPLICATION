@@ -82,7 +82,7 @@ export const Header = () => {
 
             <NavLink to="/" className="font-semibold sm:text-xl  ">
               <span className="px-2 py-1 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-lg text-white sm:text-2xl  ">
-               Krunal Blog <span></span>
+                Krunal Blog <span></span>
               </span>
             </NavLink>
           </div>

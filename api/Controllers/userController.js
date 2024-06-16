@@ -13,7 +13,6 @@ export const updateUser = async (req, res) => {
         username: username,
         email: email,
         password: hashPassword,
-       
       },
       { new: true }
     );
@@ -27,24 +26,22 @@ export const updateUser = async (req, res) => {
     res.status(400).json({
       success: false,
       message: "something went wrong",
-      error
+      error,
     });
   }
 };
 
-
-
 export const getAllUsers = async (req, res, next) => {
   if (!req.user.isAdmin) {
     return res.status(403).json({
-      message : "You are not allowed to see all users'"
-    })
+      message: "You are not allowed to see all users'",
+    });
   }
-  
+
   try {
     const startIndex = parseInt(req.query.startIndex) || 0;
     const limit = parseInt(req.query.limit) || 9;
-    const sortDirection = req.query.sort === 'asc' ? 1 : -1;
+    const sortDirection = req.query.sort === "asc" ? 1 : -1;
 
     const users = await User.find()
       .sort({ createdAt: sortDirection })
@@ -76,8 +73,8 @@ export const getAllUsers = async (req, res, next) => {
     });
   } catch (error) {
     res.status(400).json({
-     success:false,
-     message : 'something went wrong'
+      success: false,
+      message: "something went wrong",
     });
   }
 };
@@ -85,16 +82,16 @@ export const getAllUsers = async (req, res, next) => {
 export const deleteUser = async (req, res, next) => {
   if (!req.user.isAdmin) {
     return res.status(403).json({
-      message : 'You are not allowed to delete this user'
+      message: "You are not allowed to delete this user",
     });
   }
   try {
     await User.findByIdAndDelete(req.params.userId);
-    res.status(200).json('User has been deleted');
+    res.status(200).json("User has been deleted");
   } catch (error) {
     res.status(400).json({
-      success:false,
-      message : 'something went wrong'
-     });
+      success: false,
+      message: "something went wrong",
+    });
   }
 };

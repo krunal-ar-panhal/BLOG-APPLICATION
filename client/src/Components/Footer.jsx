@@ -14,8 +14,10 @@ export const Footer = () => {
           </NavLink>
         </nav>
 
-        <aside >
-          <p className="font-semibold">Copyright © 2024 - All right reserved by Meme's Kitchen</p>
+        <aside>
+          <p className="font-semibold">
+            Copyright © 2024 - All right reserved by Meme's Kitchen
+          </p>
         </aside>
       </footer>
     </>

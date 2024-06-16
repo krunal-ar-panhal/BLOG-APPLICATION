@@ -1,12 +1,12 @@
-import { useEffect, useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
-import { PostCard } from '../Components/PostCard';
+import { useEffect, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+import { PostCard } from "../Components/PostCard";
 
 export const Search = () => {
   const [sidebarData, setSidebarData] = useState({
-    searchTerm: '',
-    sort: 'desc',
-    category: 'uncategorized',
+    searchTerm: "",
+    sort: "desc",
+    category: "uncategorized",
   });
 
   const [posts, setPosts] = useState([]);
@@ -18,9 +18,9 @@ export const Search = () => {
 
   useEffect(() => {
     const urlParams = new URLSearchParams(location.search);
-    const searchTermFromUrl = urlParams.get('searchTerm');
-    const sortFromUrl = urlParams.get('sort');
-    const categoryFromUrl = urlParams.get('category');
+    const searchTermFromUrl = urlParams.get("searchTerm");
+    const sortFromUrl = urlParams.get("sort");
+    const categoryFromUrl = urlParams.get("category");
     if (searchTermFromUrl || sortFromUrl || categoryFromUrl) {
       setSidebarData({
         ...sidebarData,
@@ -61,9 +61,9 @@ export const Search = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const urlParams = new URLSearchParams(location.search);
-    urlParams.set('searchTerm', sidebarData.searchTerm);
-    urlParams.set('sort', sidebarData.sort);
-    urlParams.set('category', sidebarData.category);
+    urlParams.set("searchTerm", sidebarData.searchTerm);
+    urlParams.set("sort", sidebarData.sort);
+    urlParams.set("category", sidebarData.category);
     const searchQuery = urlParams.toString();
     navigate(`/search?${searchQuery}`);
   };
@@ -72,7 +72,7 @@ export const Search = () => {
     const numberOfPosts = posts.length;
     const startIndex = numberOfPosts;
     const urlParams = new URLSearchParams(location.search);
-    urlParams.set('startIndex', startIndex);
+    urlParams.set("startIndex", startIndex);
     const searchQuery = urlParams.toString();
     const res = await fetch(`/api/post/getposts?${searchQuery}`);
     if (!res.ok) {
@@ -86,65 +86,72 @@ export const Search = () => {
   };
 
   return (
-    <div className='flex flex-col md:flex-row'>
-      <div className='p-7 border-b md:border-r md:min-h-screen border-gray-500'>
-        <form className='flex flex-col gap-8' onSubmit={handleSubmit}>
-          <div className='flex items-center gap-2'>
-            <label className='whitespace-nowrap font-semibold'>Search Term:</label>
+    <div className="flex flex-col md:flex-row">
+      <div className="p-7 border-b md:border-r md:min-h-screen border-gray-500">
+        <form className="flex flex-col gap-8" onSubmit={handleSubmit}>
+          <div className="flex items-center gap-2">
+            <label className="whitespace-nowrap font-semibold">
+              Search Term:
+            </label>
             <input
-              placeholder='Search...'
-              id='searchTerm'
-              type='text'
+              placeholder="Search..."
+              id="searchTerm"
+              type="text"
               value={sidebarData.searchTerm}
               onChange={handleChange}
-              className='p-2 border rounded-md w-full'
+              className="p-2 border rounded-md w-full"
             />
           </div>
-          <div className='flex items-center gap-2'>
-            <label className='font-semibold'>Sort:</label>
+          <div className="flex items-center gap-2">
+            <label className="font-semibold">Sort:</label>
             <select
               onChange={handleChange}
               value={sidebarData.sort}
-              id='sort'
-              className='p-2 border rounded-md'
+              id="sort"
+              className="p-2 border rounded-md"
             >
-              <option value='desc'>Latest</option>
-              <option value='asc'>Oldest</option>
+              <option value="desc">Latest</option>
+              <option value="asc">Oldest</option>
             </select>
           </div>
-          <div className='flex items-center gap-2'>
-            <label className='font-semibold'>Category:</label>
+          <div className="flex items-center gap-2">
+            <label className="font-semibold">Category:</label>
             <select
               onChange={handleChange}
               value={sidebarData.category}
-              id='category'
-              className='p-2 border rounded-md'
+              id="category"
+              className="p-2 border rounded-md"
             >
-              <option value='uncategorized'>Uncategorized</option>
-              <option value='reactjs'>React.js</option>
-              <option value='nextjs'>Next.js</option>
-              <option value='javascript'>JavaScript</option>
+              <option value="uncategorized">Uncategorized</option>
+              <option value="reactjs">React.js</option>
+              <option value="nextjs">Next.js</option>
+              <option value="javascript">JavaScript</option>
             </select>
           </div>
-          <button type='submit' className='px-4 py-2 bg-gradient-to-r from-purple-400 to-pink-600 text-white rounded-md hover:from-purple-500 hover:to-pink-700'>
+          <button
+            type="submit"
+            className="px-4 py-2 bg-gradient-to-r from-purple-400 to-pink-600 text-white rounded-md hover:from-purple-500 hover:to-pink-700"
+          >
             Apply Filters
           </button>
         </form>
       </div>
-      <div className='w-full'>
-        <h1 className='text-3xl font-semibold sm:border-b border-gray-500 p-3 mt-5'>
+      <div className="w-full">
+        <h1 className="text-3xl font-semibold sm:border-b border-gray-500 p-3 mt-5">
           Posts results:
         </h1>
-        <div className='p-7 flex flex-wrap gap-4'>
+        <div className="p-7 flex flex-wrap gap-4">
           {!loading && posts.length === 0 && (
-            <p className='text-xl text-gray-500'>No posts found.</p>
+            <p className="text-xl text-gray-500">No posts found.</p>
           )}
-          {loading && <p className='text-xl text-gray-500'>Loading...</p>}
-          {!loading && posts && posts.map((post) => <PostCard key={post._id} post={post} />)}
+          {loading && <p className="text-xl text-gray-500">Loading...</p>}
+          {!loading &&
+            posts &&
+            posts.map((post) => <PostCard key={post._id} post={post} />)}
           {showMore && (
             <button
               onClick={handleShowMore}
-              className='text-teal-500 text-lg hover:underline p-7 w-full'
+              className="text-teal-500 text-lg hover:underline p-7 w-full"
             >
               Show More
             </button>
@@ -153,4 +160,4 @@ export const Search = () => {
       </div>
     </div>
   );
-}
+};

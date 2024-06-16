@@ -32,15 +32,15 @@ export const CreatePost = () => {
         return;
       }
 
-      if (res.ok ) {
+      if (res.ok) {
         setError(null);
-        toast.success('post created')
+        toast.success("post created");
         navigate(`/dashboard`);
       }
       console.log(data.slug);
     } catch (error) {
       setError("Something went wrong");
-      toast.error(error.message)
+      toast.error(error.message);
       console.log(error);
     }
   };
@@ -65,8 +65,8 @@ export const CreatePost = () => {
 
   const handleUploadClick = () => {
     toast.success("Image uploaded");
-    navigate('')
-  }
+    navigate("");
+  };
 
   return (
     <div className="min-h-screen p-3 mx-auto max-w-3xl mb-9">
@@ -98,16 +98,16 @@ export const CreatePost = () => {
           </select>
         </div>
         <div className="flex flex-col m">
-          <div className="flex gap-4 items-center justify-between border-4 border-teal-500 p-3 border-dotted mt-6 mb-6" onChange={handleFileUpload}>
-            <input
-              type="file"
-              accept="image/*"
-              className="flex-"
-              id="file"
-              
-            />
-            <button  onClick={handleUploadClick} className="p-2 border rounded-xl shadow-lg border-purple-500 hover:bg-gradient-to-r hover:to-pink-400 from-purple-500 hover:text-white hover:font-semibold active:bg-none active:text-black text-black ">
-           Upload Image
+          <div
+            className="flex gap-4 items-center justify-between border-4 border-teal-500 p-3 border-dotted mt-6 mb-6"
+            onChange={handleFileUpload}
+          >
+            <input type="file" accept="image/*" className="flex-" id="file" />
+            <button
+              onClick={handleUploadClick}
+              className="p-2 border rounded-xl shadow-lg border-purple-500 hover:bg-gradient-to-r hover:to-pink-400 from-purple-500 hover:text-white hover:font-semibold active:bg-none active:text-black text-black "
+            >
+              Upload Image
             </button>
           </div>
 

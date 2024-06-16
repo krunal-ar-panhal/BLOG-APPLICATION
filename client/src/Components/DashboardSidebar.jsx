@@ -41,20 +41,19 @@ export const DashboardSidebar = () => {
               </span>
             </div>
           </Link>
-          
+
           {currentUser && currentUser.isAdmin && (
-          <Link to='/dashboard?tab=dash'>
-            <div
-              className={`flex items-center p-2 gap-2 mt-4 ${
-                tab === 'dash' || !tab ? 'bg-gray-700' : ''
-              } rounded-md hover:bg-gray-700 transition-colors cursor-pointer`}
-            >
-              <MdDashboard className="w-5 h-5 " />
-              <span className="">Dashboard</span>
-            </div>
-          </Link>
-        )
-}
+            <Link to="/dashboard?tab=dash">
+              <div
+                className={`flex items-center p-2 gap-2 mt-4 ${
+                  tab === "dash" || !tab ? "bg-gray-700" : ""
+                } rounded-md hover:bg-gray-700 transition-colors cursor-pointer`}
+              >
+                <MdDashboard className="w-5 h-5 " />
+                <span className="">Dashboard</span>
+              </div>
+            </Link>
+          )}
           <Link to="/dashboard?tab=posts">
             <div
               className={`flex items-center p-2 gap-2 cursor-pointer rounded ${
@@ -85,7 +84,6 @@ export const DashboardSidebar = () => {
               <span>Comments</span>
             </div>
           </Link>
-          
         </div>
       </div>
     </div>

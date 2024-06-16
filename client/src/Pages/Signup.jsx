@@ -1,52 +1,51 @@
 import React, { useState } from "react";
-import { NavLink,useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { Google } from "../Components/Google";
 import toast from "react-hot-toast";
 
 export const Signup = () => {
-
-  const [formData,setFormData]=useState({});
-  const [loading,setLoading]=useState(false);
-  const [error,setError]=useState(null);
+  const [formData, setFormData] = useState({});
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
   const navigate = useNavigate();
 
   const handleChange = (e) => {
     setFormData({
       ...formData,
-      [e.target.id]:e.target.value,
+      [e.target.id]: e.target.value,
     });
     console.log(formData);
-  }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      setLoading(true)
-      const res = await fetch('/api/auth/signup',{
-        method:'POST',
-        headers:{
-          'Content-Type':'application/json',
+      setLoading(true);
+      const res = await fetch("/api/auth/signup", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
         },
-        body:JSON.stringify(formData),
-      })
+        body: JSON.stringify(formData),
+      });
       const data = await res.json();
       console.log(data);
-      if(data.success === false){
+      if (data.success === false) {
         setLoading(false);
         setError(data.message);
-        toast.error(data.message)
+        toast.error(data.message);
         return;
       }
       setLoading(false);
       setError(null);
-      navigate('/signin')
-      toast.success(data.message)
+      navigate("/signin");
+      toast.success(data.message);
     } catch (error) {
       setLoading(false);
-        setError(error.message);
-        toast.error(error.message)
+      setError(error.message);
+      toast.error(error.message);
     }
-  }
+  };
 
   return (
     <>
@@ -79,11 +78,18 @@ export const Signup = () => {
               onChange={handleChange}
             />
 
-            <button className="p-3 rounded-lg border bg-blue-500 text-white hover:bg-blue-700 active:bg-blue-900 shadow-xl">SIGN-UP</button>
-            <Google/>
+            <button className="p-3 rounded-lg border bg-blue-500 text-white hover:bg-blue-700 active:bg-blue-900 shadow-xl">
+              SIGN-UP
+            </button>
+            <Google />
           </form>
           <div>
-            <p>Have an account ? <span className="underline text-blue-500 cursor-pointer"><NavLink to="/signin">Sign-In</NavLink></span></p>
+            <p>
+              Have an account ?{" "}
+              <span className="underline text-blue-500 cursor-pointer">
+                <NavLink to="/signin">Sign-In</NavLink>
+              </span>
+            </p>
           </div>
         </div>
       </div>

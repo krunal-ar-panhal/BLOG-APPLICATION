@@ -1,14 +1,14 @@
-import { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
-import { HiOutlineExclamationCircle } from 'react-icons/hi';
-import { FaCheck, FaTimes } from 'react-icons/fa';
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { HiOutlineExclamationCircle } from "react-icons/hi";
+import { FaCheck, FaTimes } from "react-icons/fa";
 
 export const DashUsers = () => {
   const { currentUser } = useSelector((state) => state.user);
   const [users, setUsers] = useState([]);
   const [showMore, setShowMore] = useState(true);
   const [showModal, setShowModal] = useState(false);
-  const [userIdToDelete, setUserIdToDelete] = useState('');
+  const [userIdToDelete, setUserIdToDelete] = useState("");
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -49,19 +49,19 @@ export const DashUsers = () => {
 
   const handleDeleteUser = async () => {
     try {
-        const res = await fetch(`/api/user/delete/${userIdToDelete}`, {
-            method: 'DELETE',
-        });
-        const data = await res.json();
-        console.log(data);
-        if (res.ok) {
-            setUsers((prev) => prev.filter((user) => user._id !== userIdToDelete));
-            setShowModal(false);
-        } else {
-            console.log(data.message);
-        }
+      const res = await fetch(`/api/user/delete/${userIdToDelete}`, {
+        method: "DELETE",
+      });
+      const data = await res.json();
+      console.log(data);
+      if (res.ok) {
+        setUsers((prev) => prev.filter((user) => user._id !== userIdToDelete));
+        setShowModal(false);
+      } else {
+        console.log(data.message);
+      }
     } catch (error) {
-        console.log(error.message);
+      console.log(error.message);
     }
   };
 
@@ -72,12 +72,24 @@ export const DashUsers = () => {
           <table className="min-w-full divide-y divide-gray-200 shadow-md">
             <thead className="bg-gray-800 ">
               <tr>
-                <th className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">Date created</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">User image</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">Username</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">Email</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">Admin</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">Delete</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
+                  Date created
+                </th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
+                  User image
+                </th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
+                  Username
+                </th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
+                  Email
+                </th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
+                  Admin
+                </th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
+                  Delete
+                </th>
               </tr>
             </thead>
             <tbody className="bg-white divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700">
@@ -93,7 +105,9 @@ export const DashUsers = () => {
                       className="w-10 h-10 object-cover bg-gray-500 rounded-full"
                     />
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap">{user.username}</td>
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    {user.username}
+                  </td>
                   <td className="px-6 py-4 whitespace-nowrap">{user.email}</td>
                   <td className="px-6 py-4 whitespace-nowrap">
                     {user.isAdmin ? (
@@ -133,7 +147,7 @@ export const DashUsers = () => {
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
           <div className="bg-white rounded-lg p-6 dark:bg-gray-800">
             <div className="text-center">
-              <HiOutlineExclamationCircle className ="text-black mb-4 mx-auto" />
+              <HiOutlineExclamationCircle className="text-black mb-4 mx-auto" />
               <h3 className="mb-5 text-lg text-black">
                 Are you sure you want to delete this user?
               </h3>
@@ -157,4 +171,4 @@ export const DashUsers = () => {
       )}
     </div>
   );
-}
+};
