@@ -12,7 +12,6 @@ import path from "path";
 const app = express();
 config();
 
-const __dirname = path.resolve();
 
 const PORT = process.env.PORT;
 
@@ -33,11 +32,6 @@ app.use("/api/user", userRouter);
 app.use("/api/post", postRoutes);
 app.use("/api/comment", commentRoutes);
 
-app.use(express.static(path.join(__dirname, "/client/dist")));
-
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "client", "dist", "index.html"));
-});
 
 app.listen(PORT, () => {
   console.log(`${PORT}`);
